@@ -11,6 +11,7 @@ import static android.R.id.progress;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String PROGRESS ="PROGRESS";
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     Handler handler = new Handler(){
         public void handleMessage(Message msg){
-            int p = msg.getData().getInt("PROGRESS");
+            int p = msg.getData().getInt(PROGRESS);
             progressBar.setProgress(p);
         }
     };
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle messageBundle = new Bundle();
                 for (int i = 0; i < 100; i++){
                     message = handler.obtainMessage();
-                    messageBundle.putInt("PROGRESS", i);
+                    messageBundle.putInt(PROGRESS, i);
                     message.setData(messageBundle);
                     handler.sendMessage(message);
                     Thread.sleep(300);
